@@ -41,3 +41,7 @@ Ticketsystem where users can post tickets describing problems or requests. These
 
 ![](./images/UseCase.png)
 
+- UC-1 [View all Tickets]: The Admin retrieves a complete list of tickets in the system.
+- UC-2 [View Ticket Details]: The Admin retrieves detailed information for a selected ticket.
+- UC-3 [Manage Tickets]: The Admin creates, updates, and deletes tickets.
+- UC-4 [Manage Own Tickets]: The User creates, views, and deletes only their own tickets.
