@@ -39,5 +39,5 @@ Ticketsystem where users can post tickets describing problems or requests. These
 
 ## Use Case
 
-![](images/Use Case 1.png)
+![](images/UseCase.png)
 
