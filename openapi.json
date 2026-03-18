@@ -1,0 +1,255 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Ticket System",
+    "description": "This is an API for a ticket management system.",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://yourticketsystem.com/api/v01"
+    }
+  ],
+  "tags": [
+    {
+      "name": "ticket",
+      "description": "Ticket management"
+    }
+  ],
+  "paths": {
+    "/tickets": {
+      "post": {
+        "tags": ["ticket"],
+        "summary": "Create a new ticket",
+        "description": "User can create a new support ticket.",
+        "operationId": "createTicket",
+        "requestBody": {
+          "description": "Create a new ticket in the system",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ticket"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": ["ticket"],
+        "summary": "Get tickets",
+        "description": "Admin gets all tickets. User gets only their own tickets.",
+        "operationId": "getTickets",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ticket"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets/{ticketId}": {
+      "get": {
+        "tags": ["ticket"],
+        "summary": "Get a single ticket",
+        "description": "Admin can retrieve any ticket. User can retrieve only their own ticket.",
+        "operationId": "getTicketById",
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "description": "ID of ticket to return",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ticket"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ticket not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["ticket"],
+        "summary": "Update a ticket",
+        "description": "Admin can update ticket details and status.",
+        "operationId": "updateTicket",
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "description": "ID of ticket to update",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existing ticket",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ticket"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ticket not found"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["ticket"],
+        "summary": "Delete a ticket",
+        "description": "Admin can delete any ticket. User can delete only their own ticket.",
+        "operationId": "deleteTicket",
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "description": "ID of ticket to delete",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Ticket not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Ticket": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Login issue"
+          },
+          "description": {
+            "type": "string",
+            "example": "I cannot log into my account."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["Open", "In Progress", "Closed"],
+            "example": "Open"
+          },
+          "createdBy": {
+            "type": "string",
+            "example": "user123"
+          },
+          "assignedTo": {
+            "type": "string",
+            "example": "supportAgent1"
+          }
+        }
+      },
+      "TicketInput": {
+        "type": "object",
+        "required": ["title", "description"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Login issue"
+          },
+          "description": {
+            "type": "string",
+            "example": "I cannot log into my account."
+          }
+        }
+      },
+      "TicketUpdate": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Updated issue"
+          },
+          "description": {
+            "type": "string",
+            "example": "Updated description"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["Open", "In Progress", "Closed"],
+            "example": "In Progress"
+          },
+          "assignedTo": {
+            "type": "string",
+            "example": "supportAgent1"
+          }
+        }
+      }
+    }
+  }
+}
