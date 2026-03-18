@@ -39,4 +39,5 @@ Ticketsystem where users can post tickets describing problems or requests. These
 
 ## Use Case
 
-![image alt](https://github.com/RaBaTen/Ticketsystem/blob/main/Use%20Case%201.png?raw=true)
+![](images/Use Case 1.png)
+
