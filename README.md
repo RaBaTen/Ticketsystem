@@ -35,3 +35,8 @@ Ticketsystem where users can post tickets describing problems or requests. These
 5. As an Admin, I want a consistent visual appearance so the system is easy to navigate.
 6. As a User, I want to create a support ticket describing my issue.
 7. As a User, I want to view the status of my submitted tickets.
+
+
+## Use Case
+
+![image alt](https://github.com/RaBaTen/Ticketsystem/blob/main/Use%20Case%201.png?raw=true)
