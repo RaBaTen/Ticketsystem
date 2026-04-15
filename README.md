@@ -45,3 +45,15 @@ Ticketsystem where users can post tickets describing problems or requests. These
 - UC-2 [View Ticket Details]: The Admin retrieves detailed information for a selected ticket.
 - UC-3 [Manage Tickets]: The Admin creates, updates, and deletes tickets.
 - UC-4 [Manage Own Tickets]: The User creates, views, and deletes only their own tickets.
+
+
+## Design
+
+This Ticket System is design as a REST-based backend application using Spring Boot. The API allows Users and Administrators to interact with Tickets through HTTP endpoint.
+
+## Prototype Design
+
+At this Point no frontend prototype is implemented, but you can test it with the "Test.http" file. This can be tested via Intelij or other programs.
+
+## Domain Design
+
