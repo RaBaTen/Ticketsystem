@@ -7,7 +7,8 @@
   },
   "servers": [
     {
-      "url": "https://yourticketsystem.com/api/v01"
+      "url": "http://localhost:8080",
+      "description": "Local development server"
     }
   ],
   "tags": [
@@ -21,8 +22,20 @@
       "post": {
         "tags": ["ticket"],
         "summary": "Create a new ticket",
-        "description": "User can create a new support ticket.",
+        "description": "A user can create a new support ticket.",
         "operationId": "createTicket",
+        "parameters": [
+          {
+            "name": "X-User",
+            "in": "header",
+            "required": true,
+            "description": "Username of the current user",
+            "schema": {
+              "type": "string",
+              "example": "user123"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Create a new ticket in the system",
           "required": true,
@@ -35,8 +48,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful operation",
+          "201": {
+            "description": "Ticket created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -45,7 +58,7 @@
               }
             }
           },
-          "405": {
+          "400": {
             "description": "Invalid input"
           }
         }
@@ -55,6 +68,29 @@
         "summary": "Get tickets",
         "description": "Admin gets all tickets. User gets only their own tickets.",
         "operationId": "getTickets",
+        "parameters": [
+          {
+            "name": "X-User",
+            "in": "header",
+            "required": true,
+            "description": "Username of the current user",
+            "schema": {
+              "type": "string",
+              "example": "user123"
+            }
+          },
+          {
+            "name": "X-Role",
+            "in": "header",
+            "required": true,
+            "description": "Role of the current user",
+            "schema": {
+              "type": "string",
+              "enum": ["USER", "ADMIN"],
+              "example": "USER"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -83,10 +119,31 @@
             "name": "ticketId",
             "in": "path",
             "required": true,
-            "description": "ID of ticket to return",
+            "description": "ID of the ticket to return",
             "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          },
+          {
+            "name": "X-User",
+            "in": "header",
+            "required": true,
+            "description": "Username of the current user",
+            "schema": {
+              "type": "string",
+              "example": "user123"
+            }
+          },
+          {
+            "name": "X-Role",
+            "in": "header",
+            "required": true,
+            "description": "Role of the current user",
+            "schema": {
+              "type": "string",
+              "enum": ["USER", "ADMIN"],
+              "example": "USER"
             }
           }
         ],
@@ -101,6 +158,9 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Ticket not found"
           }
@@ -109,17 +169,38 @@
       "put": {
         "tags": ["ticket"],
         "summary": "Update a ticket",
-        "description": "Admin can update ticket details and status.",
+        "description": "Admin can update any ticket. A user can update only their own ticket.",
         "operationId": "updateTicket",
         "parameters": [
           {
             "name": "ticketId",
             "in": "path",
             "required": true,
-            "description": "ID of ticket to update",
+            "description": "ID of the ticket to update",
             "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          },
+          {
+            "name": "X-User",
+            "in": "header",
+            "required": true,
+            "description": "Username of the current user",
+            "schema": {
+              "type": "string",
+              "example": "user123"
+            }
+          },
+          {
+            "name": "X-Role",
+            "in": "header",
+            "required": true,
+            "description": "Role of the current user",
+            "schema": {
+              "type": "string",
+              "enum": ["USER", "ADMIN"],
+              "example": "ADMIN"
             }
           }
         ],
@@ -136,7 +217,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful operation",
+            "description": "Ticket updated successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -145,34 +226,61 @@
               }
             }
           },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Ticket not found"
-          },
-          "405": {
-            "description": "Invalid input"
           }
         }
       },
       "delete": {
         "tags": ["ticket"],
         "summary": "Delete a ticket",
-        "description": "Admin can delete any ticket. User can delete only their own ticket.",
+        "description": "Admin can delete any ticket. A user can delete only their own ticket.",
         "operationId": "deleteTicket",
         "parameters": [
           {
             "name": "ticketId",
             "in": "path",
             "required": true,
-            "description": "ID of ticket to delete",
+            "description": "ID of the ticket to delete",
             "schema": {
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "X-User",
+            "in": "header",
+            "required": true,
+            "description": "Username of the current user",
+            "schema": {
+              "type": "string",
+              "example": "user123"
+            }
+          },
+          {
+            "name": "X-Role",
+            "in": "header",
+            "required": true,
+            "description": "Role of the current user",
+            "schema": {
+              "type": "string",
+              "enum": ["USER", "ADMIN"],
+              "example": "ADMIN"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful operation"
+          "204": {
+            "description": "Ticket deleted successfully"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Ticket not found"
@@ -185,6 +293,7 @@
     "schemas": {
       "Ticket": {
         "type": "object",
+        "required": ["id", "title", "description", "status", "createdBy"],
         "properties": {
           "id": {
             "type": "integer",
@@ -210,6 +319,7 @@
           },
           "assignedTo": {
             "type": "string",
+            "nullable": true,
             "example": "supportAgent1"
           }
         }
@@ -246,6 +356,7 @@
           },
           "assignedTo": {
             "type": "string",
+            "nullable": true,
             "example": "supportAgent1"
           }
         }
