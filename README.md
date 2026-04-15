@@ -57,3 +57,5 @@ At this Point no frontend prototype is implemented, but you can test it with the
 
 ## Domain Design
 
+![](./images/Design.png)
+
