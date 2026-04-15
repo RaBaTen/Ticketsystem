@@ -57,5 +57,7 @@ At this Point no frontend prototype is implemented, but you can test it with the
 
 ## Domain Design
 
+The main entity of the system is:
+
 ![](./images/Design.png)
 
