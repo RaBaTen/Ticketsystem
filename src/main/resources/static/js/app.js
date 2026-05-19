@@ -175,4 +175,33 @@ async function deleteTicket(id) {
 }
  
 loadTickets();
- 
+
+
+ async function editTicket(id, oldTitle, oldDescription) {
+
+    const newTitle = prompt("Edit title:", oldTitle);
+    const newDescription = prompt("Edit description:", oldDescription);
+
+    if (newTitle === null || newDescription === null) {
+        return;
+    }
+
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": getAuthHeader()
+        },
+        body: JSON.stringify({
+            title: newTitle,
+            description: newDescription
+        })
+    });
+
+    if (!response.ok) {
+        alert("Could not update ticket");
+        return;
+    }
+
+    loadTickets();
+}
