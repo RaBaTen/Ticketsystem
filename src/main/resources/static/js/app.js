@@ -49,8 +49,17 @@ async function loadTickets() {
 <td>${ticket.createdBy}</td>
 <td>${ticket.assignedTo ?? "-"}</td>
 <td>
-<button onclick="closeTicket(${ticket.id})">Close</button>
-<button class="delete-btn" onclick="deleteTicket(${ticket.id})">Delete</button>
+    <button onclick="editTicket(${ticket.id}, '${ticket.title}', '${ticket.description}')">
+        Edit
+    </button>
+
+    <button onclick="closeTicket(${ticket.id})">
+        Close
+    </button>
+
+    <button class="delete-btn" onclick="deleteTicket(${ticket.id})">
+        Delete
+    </button>
 </td>
 
         `;
