@@ -67,7 +67,7 @@ The main entity of the system is:
 
 The Ticket System uses a simple web dashboard interface. Users can log in, create tickets, view existing tickets, edit ticket information, assign tickets to agents, close tickets, and delete tickets. The interface consists of a login area, a ticket creation form, a ticket table, and an edit popup dialog.
 
-(Add screenshot of your frontend here)
+![](./images/frontend.png)
 
 ## Domain Design
 
@@ -89,8 +89,6 @@ Enumeration values:
 - OPEN
 - IN_PROGRESS
 - CLOSED
-
-(Add your UML class diagram screenshot here)
 
 ## Business Logic
 
