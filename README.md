@@ -61,3 +61,90 @@ The main entity of the system is:
 
 ![](./images/Design.png)
 
+# Design
+
+## Prototype Design
+
+The Ticket System uses a simple web dashboard interface. Users can log in, create tickets, view existing tickets, edit ticket information, assign tickets to agents, close tickets, and delete tickets. The interface consists of a login area, a ticket creation form, a ticket table, and an edit popup dialog.
+
+(Add screenshot of your frontend here)
+
+## Domain Design
+
+### Ticket
+
+Attributes:
+- id : Long
+- title : String
+- description : String
+- status : TicketStatus
+- createdBy : String
+- assignedTo : String
+- createdAt : LocalDateTime
+- updatedAt : LocalDateTime
+
+### TicketStatus
+
+Enumeration values:
+- OPEN
+- IN_PROGRESS
+- CLOSED
+
+(Add your UML class diagram screenshot here)
+
+## Business Logic
+
+The system manages support tickets.
+
+Rules:
+- Users can create tickets.
+- Users can view only their own tickets.
+- Administrators can view all tickets.
+- Administrators can assign tickets to support agents.
+- Administrators can update ticket status.
+- Administrators can delete tickets.
+- Every ticket has a status of OPEN, IN_PROGRESS, or CLOSED.
+- Authentication is required for all ticket operations.
+
+# Implementation
+
+## Backend Technology
+
+- Java 21
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Spring Security
+- H2 Database
+- Maven
+
+## Frontend Technology
+
+- HTML
+- CSS
+- JavaScript
+- Fetch API
+
+# Project Management
+
+## Roles
+
+| Member | Responsibilities |
+|----------|----------|
+| Rafael | Backend development, frontend implementation, GitHub management |
+| Manuel | Design and testing |
+| Arda | API design and testing |
+| Luca | Documentation and frontend support |
+
+## Milestones
+
+- Decide use case
+- Create project description
+- Draft API specification
+- Initial backend setup
+- Implement web services
+- Enable authentication
+- Implement frontend
+- Integrate frontend and backend
+- Final testing and documentation
+
