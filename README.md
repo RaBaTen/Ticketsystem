@@ -18,10 +18,11 @@ Internet Technology Project Ticket System
 - [Project Management](#project-management)
   - [Roles](#roles)
   - [Milestones](#milestones)
+  - [Video](#video)
  
 
 ## Analysis
-test
+
 
 
 ### Scenario
@@ -130,9 +131,9 @@ Rules:
 | Member | Responsibilities |
 |----------|----------|
 | Rafael | Backend development, frontend implementation, GitHub management |
-| Manuel | Design and testing |
-| Arda | API design and testing |
-| Luca | Documentation and frontend support |
+| Manuel | A little coding and testing |
+| Arda | Testing, cutting video |
+| Luca | Html and css |
 
 ## Milestones
 
@@ -145,4 +146,8 @@ Rules:
 - Implement frontend
 - Integrate frontend and backend
 - Final testing and documentation
+
+## Video
+
+https://www.youtube.com/watch?v=ow9LB6Nm99s&t=103s
 
